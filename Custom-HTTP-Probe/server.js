@@ -45,7 +45,7 @@ router.get("/",function(req,res){
             '/probe/readiness': 'Standard readiness probe',
             '/probe/liveness': 'Standard liveness probe',
             '/probe/custom': 'A strange custom probe...',
-            '/somethingnew':'Main 3.0....'
+            '/somethingnew':'Main 4.0....'
         }, 
         state: getState()
     }
