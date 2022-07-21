@@ -39,7 +39,7 @@ doCountdown();
 router.get("/",function(req,res){
     var response = {
         paths: {
-            '/backend-new':'Backend 1.0....'
+            '/backend-new':'Backend 2.0....'
         }, 
         state: getState()
     }
