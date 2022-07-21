@@ -39,7 +39,7 @@ doCountdown();
 router.get("/",function(req,res){
     var response = {
         paths: {
-            '/somethingnew':'deploy-qa-frontend 2.0....'
+            '/somethingnew':'deploy-qa-frontend 3.0....'
         }, 
         state: getState()
     }
