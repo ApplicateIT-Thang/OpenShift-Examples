@@ -1,149 +1,62 @@
-# Custom HTTP Probe
+# Sample containerized Python application
 
-## Context
+This repo contains a sample application to deploy to Kubernetes. The application is a simple HelloWorld app using Python and Flask framework.
 
-An application is deployed in OpenShift and has no built-in liveness/readiness
-probes. This example shows how to implement a custom probe.
+## Run with Docker
 
-## The sample application
+```bash
+$ docker build -f Dockerfile -t hello-python:latest .
 
-This sample app has three probes:
+$ docker run -it -p 5001:5001 --name hello_python hello-python:latest
 
-- a standard liveness probe
-- a standard readiness probe
-- a custom probe
-
-The app takes about 30 seconds to boot and then exhibit two endpoints:
-
-- `/please-die` will switch the liveness probe to "dead"
-- `/please-resuscitate` will switch the liveness probe to "alive"
-
-The custom probe is a mix of everything you can find in a business app:
-
-- when the app is alive, it returns a non-200 HTTP status with JSON content
-- when the app is dead, it returns a 500 HTTP status with HTML content
-
-## Deploy the sample application
-
-```sh
-oc new-app nodejs~https://github.com/nmasse-itix/OpenShift-Examples.git --name myapp --context-dir=Custom-HTTP-Probe
-oc expose svc/myapp
+# Docker Docs: https://docs.docker.com/
+# Docker Reference: https://docs.docker.com/reference/
 ```
 
-## Play with it
+## Run with Docker Compose
 
-```sh
-export SAMPLE_APP_URL="http://$(oc get route myapp -o jsonpath='{.spec.host}')" && echo $SAMPLE_APP_URL
+```bash
+$ docker-compose up hello_py_devl && docker-compose rm -fsv
+
+# For additional instruction please see notes at the bottom
+# of docker-compose.yml file in the app root directory.
+
+# Docker compose docs: https://docs.docker.com/compose/
 ```
 
-Print some help:
+## Run with Python
 
-```sh
-curl $SAMPLE_APP_URL/ -D -
+System Requirements: [Git](http://www.git-scm.com), [Python 3.8.0](https://www.python.org/downloads/)
+
+```bash
+# Check dependencies
+$ git --version
+git version 2.23.0
+
+$ python --version
+Python 3.8.0
+
+$ pip --version # pip comes as a part of python install
+pip 20.0.2 from /usr/local/lib/python3.8/site-packages/pip (python 3.8)
+
+# Clone the sourcecode
+$ git clone <repo url>
+$ cd <project dir>
+
+# Install project dependencies
+$ pip install -r requirements.txt
+
+# Run the application
+$ PORT=5001 python src/app.py
+
+# Check application
+$ curl http://localhost:5001/debug
+# (or)
+# In Browser visit -> http://localhost:5001/debug/ui
 ```
 
-Check if the app is ready:
+## Sample output
 
-```sh
-curl $SAMPLE_APP_URL/probe/readiness -D -
-```
+Pointing your browser to <http://localhost:5001/debug/ui> will bring up the following:
 
-Let the app die:
-
-```sh
-curl $SAMPLE_APP_URL/please-die -D -
-```
-
-Check if the app is alive:
-
-```sh
-curl $SAMPLE_APP_URL/probe/liveness -D -
-```
-
-Let the app resuscitate:
-
-```sh
-curl $SAMPLE_APP_URL/please-resuscitate -D -
-```
-
-Inspect the custom probe:
-
-```sh
-curl $SAMPLE_APP_URL/please-die -D -
-curl $SAMPLE_APP_URL/probe/custom -D -
-```
-
-```sh
-curl $SAMPLE_APP_URL/please-resuscitate -D -
-curl $SAMPLE_APP_URL/probe/custom -D -
-```
-
-## Use the standard probes
-
-Add the liveness probe:
-
-```sh
-oc patch dc myapp --type=json -p '[ { "op": "add", "path": "/spec/template/spec/containers/0/livenessProbe", "value": { "initialDelaySeconds": 5, "timeoutSeconds": 5, "httpGet": { "path": "/probe/liveness", "port": 8080 } } } ]'
-```
-
-Add the readiness probe:
-
-```sh
-oc patch dc myapp --type=json -p '[ { "op": "add", "path": "/spec/template/spec/containers/0/readinessProbe", "value": { "initialDelaySeconds": 20, "timeoutSeconds": 5, "httpGet": { "path": "/probe/readiness", "port": 8080 } } } ]'
-```
-
-Watch the deployment:
-
-```sh
-oc get pods -w
-```
-
-Let the app die:
-
-```sh
-curl $SAMPLE_APP_URL/please-die -D -
-```
-
-Watch the app being restarted:
-
-```sh
-oc get pods -w
-```
-
-## Use the custom probe
-
-Review the [probe.py code](probe.py).
-
-Create a configMap containing the custom probe code:
-
-```sh
-oc create configmap myapp-probe --from-file probe.py
-```
-
-Mount the configMap on `/opt/probe`:
-
-```sh
-oc volume dc/myapp --add --overwrite --type=configMap --configmap-name=myapp-probe --default-mode=755 --mount-path=/opt/probe --name probe --confirm
-```
-
-Replace the standard liveness and readiness probes by the custom one:
-
-```sh
-oc patch dc myapp --type=json -p '[ { "op": "replace", "path": "/spec/template/spec/containers/0/livenessProbe", "value": { "initialDelaySeconds": 5, "timeoutSeconds": 5, "exec": { "command": [ "/opt/probe/probe.py", "http://localhost:8080/probe/custom" ] } } } ]'
-```
-
-```sh
-oc patch dc myapp --type=json -p '[ { "op": "replace", "path": "/spec/template/spec/containers/0/readinessProbe", "value": { "initialDelaySeconds": 5, "timeoutSeconds": 5, "exec": { "command": [ "/opt/probe/probe.py", "http://localhost:8080/probe/custom" ] } } } ]'
-```
-
-Let the app die:
-
-```sh
-curl $SAMPLE_APP_URL/please-die -D -
-```
-
-Watch the app being restarted:
-
-```sh
-oc get pods -w
-```
+![](images/output.png)
