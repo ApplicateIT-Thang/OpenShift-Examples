@@ -39,13 +39,7 @@ doCountdown();
 router.get("/",function(req,res){
     var response = {
         paths: {
-            '/please-die': 'This app will die very soon !',
-            '/please-resuscitate': 'This app will come back to life !',
-            '/': 'This message',
-            '/probe/readiness': 'Standard readiness probe',
-            '/probe/liveness': 'Standard liveness probe',
-            '/probe/custom': 'A strange custom probe...',
-            '/somethingnew':'DEV 3.0....'
+            '/somethingnew':'backend QA 1.0....'
         }, 
         state: getState()
     }
