@@ -1,0 +1,143 @@
+<!--
+  Copyright IBM Corp. 2021
+
+  This source code is licensed under the Apache-2.0 license found in the
+  LICENSE file in the root directory of this source tree.
+-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description"
+        content="DDC: Hybrid Cloud">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/carbon-components/css/carbon-components.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <title>DDC: Hybrid Cloud</title>
+
+</head>
+
+<body>
+    <header class="bx--header" role="banner" aria-label="IBM DDC: Hybrid Cloud" data-header>
+        <a class="bx--header__name" href="javascript:void(0)" title="">
+            <span class="bx--header__name--prefix">
+                DDC: Hybrid Cloud
+                &nbsp;
+            </span>
+            Getting Started with ArgoCD on OpenShift
+        </a>
+
+        <nav class="bx--header__nav" aria-label="DDC: Hybrid Cloud" data-header-nav>
+            <ul class="bx--header__menu-bar" aria-label="DDC: Hybrid Cloud">
+                <li>
+                    <a class="bx--header__menu-item" href="/" tabindex="0">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a class="bx--header__menu-item" href="/store" tabindex="0">
+                        Store
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <br>
+    <br>
+    <br>
+    <div class="slideshow-container">
+
+        <div class="mySlides fade">
+            <div class="numbertext">1 / 3</div>
+            <img src="../static/img/stock_pic1.jpg" style="width:100%;">
+            <div class="text">Photo by
+                <a style="color:#fff"
+                    href="https://www.pexels.com/@anntarazevich?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">
+                    Anna Tarazevich</a>
+                from <a style="color:#fff"
+                    href="https://www.pexels.com/photo/woman-in-black-shirt-holding-a-bottle-of-hand-sanitizer-5910949/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">
+                    Pexels</a>
+            </div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">2 / 3</div>
+            <img src="../static/img/stock_pic2.jpg" style="width:100%">
+            <div class="text">Photo by
+                <a style="color:#fff"
+                    href="https://www.pexels.com/@anntarazevich?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">
+                    Anna Tarazevich</a>
+                from <a style="color:#fff"
+                    href="https://www.pexels.com/photo/woman-in-black-shirt-holding-a-bottle-of-hand-sanitizer-5910949/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">
+                    Pexels</a>
+            </div>
+        </div>
+
+        <div class="mySlides fade">
+            <div class="numbertext">3 / 3</div>
+            <img src="../static/img/stock_pic3.jpg" style="width:100%">
+            <div class="text">Photo by <a style="color:#fff"
+                    href="https://www.pexels.com/@karolina-grabowska?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">
+                    Karolina Grabowska</a>
+                from <a style="color:#fff"
+                    href="https://www.pexels.com/photo/person-holding-clear-glass-jar-with-brown-and-white-medicines-4084639/?utm_content=attributionCopyText&utm_medium=referral&utm_source=pexels">
+                    Pexels</a></div>
+        </div>
+
+    </div>
+    <br>
+
+    <div style="text-align:center; display:none;">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+    <div class="bx--grid">
+        <div class="bx--row">
+            <div class="bx--col-lg-12">
+                <div class="outside">
+                    <div class="inside">
+                        <h1 align="center" class="bx--heading">{{storeTitle}}</h1>
+                        <br>
+                        <div class="bx--row">
+                            {% for offer in offers %}
+                            <div class="bx--col-lg-4">
+                                <input tabindex="-1" data-tile-input id="tile-id" class="bx--tile-input" value="tile"
+                                    type="checkbox" name="tiles" title="tile" />
+                                <label for="tile-id" aria-label="tile" class="bx--tile bx--tile--selectable"
+                                    data-tile="selectable" tabindex="0">
+                                    <h4 align="center">{{offer}}</h4>
+                                </label>
+                            </div>
+                            {% endfor %}  
+                        </div>
+                        <br>
+                        <br>
+                        <div class="bx--row">
+                            <div class="bx--col-lg-4"></div>
+                            <div class="bx--col-lg-4">
+                                <div class="cr">
+                                <button class="bx--btn bx--btn--primary" type="button" onclick="location.href='/store';">
+                                    Shop now
+                                </button>
+                            </div>
+                            </div>
+                            <div class="bx--col-lg-4"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../static/js/slideshow.js"></script>
+    <script src="https://unpkg.com/carbon-components/scripts/carbon-components.min.js"></script>
+</body>
+
+</html>
