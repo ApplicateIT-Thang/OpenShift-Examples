@@ -15,7 +15,7 @@ spec:
         app: ddc-demo
     spec:
       containers:
-      - image: manojjahgirdar/ddc-argocd-demo:v23
+      - image: manojjahgirdar/ddc-argocd-demo:v2
         name: ddc-argocd-demo
       - image: de.icr.io/vend-openshift/ddc-demo:v1
         name: ddc-demo
