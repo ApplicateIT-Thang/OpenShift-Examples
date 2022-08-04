@@ -2,17 +2,17 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: flask
-  name: python-flask-app-deployment
+    app: ddc-demo
+  name: ddc-demo-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: flask
+      app: ddc-demo
   template:
     metadata:
       labels:
-        app: flask
+        app: ddc-demo
     spec:
       containers:
       - image: de.icr.io/vend-openshift/ddc-demo:v1
