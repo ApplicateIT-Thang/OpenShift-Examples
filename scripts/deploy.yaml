@@ -16,6 +16,8 @@ spec:
     spec:
       containers:
       - env:
+        - name: Version
+          value: "1.0"
         - name: VEND_USAGE
           valueFrom:
             configMapKeyRef:
@@ -41,7 +43,7 @@ spec:
             secretKeyRef:
               key: VEND_ADMIN_PASSWORD
               name: vend-admin-creds
-        image: de.icr.io/vend-openshift/ddc-demo:v2
+        image: de.icr.io/vend-openshift/ddc-demo:v3
         name: ddc-demo
         ports:
         - containerPort: 3000
