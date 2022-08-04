@@ -21,36 +21,36 @@ offerDetails = [
 def index():
     return render_template('index.html', storeTitle=storeTitle, offers=offerDetails)
 
-products = [
-    {
-        "name": "3 Ply Mask",
-        "description": "(pack of 50)",
-        "price": "$14.99",
-        "img": "static/img/store/mask.jpg"
-    },
-    {
-        "name": "Hand Sanitizer",
-        "description": "(pack of 4)",
-        "price": "$3.99",
-        "img": "static/img/store/sanitizer.jpg"
-    },
-    {
-        "name": "3 Ply Mask",
-        "description": "(pack of 150)",
-        "price": "$19.99",
-        "img": "static/img/store/mask.jpg"
-    },
-    {
-        "name": "Hand Sanitizer",
-        "description": "(pack of 15)",
-        "price": "$14.99",
-        "img": "static/img/store/sanitizer.jpg"
-    }
-]
+# products = [
+#     {
+#         "name": "3 Ply Mask",
+#         "description": "(pack of 50)",
+#         "price": "$14.99",
+#         "img": "static/img/store/mask.jpg"
+#     },
+#     {
+#         "name": "Hand Sanitizer",
+#         "description": "(pack of 4)",
+#         "price": "$3.99",
+#         "img": "static/img/store/sanitizer.jpg"
+#     },
+#     {
+#         "name": "3 Ply Mask",
+#         "description": "(pack of 150)",
+#         "price": "$19.99",
+#         "img": "static/img/store/mask.jpg"
+#     },
+#     {
+#         "name": "Hand Sanitizer",
+#         "description": "(pack of 15)",
+#         "price": "$14.99",
+#         "img": "static/img/store/sanitizer.jpg"
+#     }
+# ]
 
-@application.route('/store')
-def store():
-    return render_template('store.html', storeTitle=storeTitle, products=products)
+# @application.route('/store')
+# def store():
+#     return render_template('store.html', storeTitle=storeTitle, products=products)
 
 
 port = os.getenv('VCAP_APP_PORT', '8080')
