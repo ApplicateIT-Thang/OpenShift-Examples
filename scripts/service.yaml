@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: python-flask-app-service
+  name: ddc-demo-service
 spec:
   selector:
-    app: flask
+    app: ddc-demo
   ports:
   - protocol: TCP
     port: 8080
