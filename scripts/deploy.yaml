@@ -15,36 +15,36 @@ spec:
         app: ddc-demo
     spec:
       containers:
-        - name: ddc-demo
-          image: de.icr.io/vend-openshift/ddc-demo:v1
-          env:
-            - name: VEND_USAGE
-              valueFrom:
-                configMapKeyRef:
-                  name: vend-usage
-                  key: VEND_USAGE
-            - name: USER
-              valueFrom:
-                secretKeyRef:
-                  name: vend-user-creds
-                  key: VEND_USER
-            - name: USERPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: vend-user-creds
-                  key: VEND_USER_PASSWORD
-            - name: ADMINUSER
-              valueFrom:
-                secretKeyRef:
-                  name: vend-admin-creds
-                  key: VEND_ADMIN
-            - name: ADMINUSERPASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: vend-admin-creds
-                  key: VEND_ADMIN_PASSWORD
-          ports:
-            - containerPort: 3000
-      restartPolicy: Always
+      - env:
+        - name: VEND_USAGE
+          valueFrom:
+            configMapKeyRef:
+              key: VEND_USAGE
+              name: vend-usage
+        - name: USER
+          valueFrom:
+            secretKeyRef:
+              key: VEND_USER
+              name: vend-user-creds
+        - name: USERPASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: VEND_USER_PASSWORD
+              name: vend-user-creds
+        - name: ADMINUSER
+          valueFrom:
+            secretKeyRef:
+              key: VEND_ADMIN
+              name: vend-admin-creds
+        - name: ADMINUSERPASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: VEND_ADMIN_PASSWORD
+              name: vend-admin-creds
+        image: de.icr.io/vend-openshift/ddc-demo:v2
+        name: ddc-demo
+        ports:
+        - containerPort: 3000
       imagePullSecrets:
-        - name: impactsphere-qa-vend-ibm-id
+      - name: impactsphere-qa-vend-ibm-id
+      restartPolicy: Always
