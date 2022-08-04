@@ -43,11 +43,6 @@ spec:
                 secretKeyRef:
                   name: vend-admin-creds
                   key: VEND_ADMIN_PASSWORD
-          volumeMounts:
-            - mountPath: /usr/src/app/accesscodes
-              name: vend-volume-accesscodes
-            - mountPath: /usr/src/app/logs
-              name: vend-volume-logs
           ports:
             - containerPort: 3000
       restartPolicy: Always
